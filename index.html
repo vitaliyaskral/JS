@@ -16,6 +16,7 @@
     <button onclick="calculaIMC()">CalculaIMC</button> 
     <button onclick="calculaMedia()">CalculaMedia</button> 
     <button onclick="calculaAreaTriangulo()">CalculaAreaTriangulo</button> 
+    <button onclick="calculaPrecioConIVA()">CalculaPrecioConIVA</button> 
 
 
     <script>
@@ -135,8 +136,33 @@
             alert("Area de un triangulo de base " + b +" y de altura " + h + " es " + a);
         }
 
+        /**
+         * -  pide un cantidad y devuelve el precio con iva
+         */
+        function precioConIVA(precio){
+            let iva = 21;
+            let precioIVA = precio + precio*(iva/100);
+            return precioIVA;
+        }
 
-        
+
+        /**
+         * calcula precio con iva, pregunta precio, llama precioConIVA
+         * y miustra al usuario el precio con iva
+         * si es > 2000 no puedes pagar en efectivo 
+         * **/
+        function calculaPrecioConIVA(){
+            let precio = prompt("Dime el precio:");
+            let precioIVA = precioConIVA(Number(precio));         
+            if (precioIVA >2000){
+                alert("El precio con IVA es: " + precioIVA + ". Es > 2000. No puedes pagar en efectivo!");
+            }
+            else{
+                alert("El precio con IVA es: " + precioIVA + ". Es <= 2000. Puedes pagar en efectivo!");
+            }
+
+        }
+
     </script>
 
 </body>

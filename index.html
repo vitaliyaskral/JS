@@ -140,8 +140,7 @@
          * -  pide un cantidad y devuelve el precio con iva
          */
         function precioConIVA(precio){
-            let iva = 21;
-            let precioIVA = precio + precio*(iva/100);
+            let precioIVA = precio*1.21;
             return precioIVA;
         }
 

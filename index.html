@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Introducción en JS</h1>
+
+    <button onclick="suma()">Sumar</button>
+    <button onclick="login()">Login</button> 
+    <button onclick="compruebaPar()">CompruebaPar</button> 
+    <button onclick="compruebaEdad()">CompruebaEdad</button> 
+    <button onclick="calculaIMC()">CalculaIMC</button> 
+    <button onclick="calculaMedia()">CalculaMedia</button> 
+    <button onclick="calculaAreaTriangulo()">CalculaAreaTriangulo</button> 
+
+
+    <script>
+        function suma(){
+            alert("Bienvenidos a mi pagina");
+            let n1 = prompt("Dime un numero?");
+            if (isNaN(n1)){
+                alert("NO es un número!");
+                return;
+            }
+            let n2 = prompt("Dime otro numero?");
+            if (isNaN(n2)){
+                    alert("NO es un número!");   
+                    return;
+            }
+            let suma = Number(n1) + Number(n2);
+            alert("La suma de " + n1 + " mas " + n2 + " es " + suma );
+        }
+       
+        function login(){
+            let usuario = prompt("Introduzca usuario:");
+            let contrasena = prompt("Introduzca contraseña:");
+
+            if(usuario == "admin" &&  contrasena == "1234"){
+                alert("Bienvenido a mi página!");
+            }
+            else {
+                alert("Acceso denegado!");
+            }
+        }
+          
+        function esPar(n){
+            if (n%2 == 0){
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
+        function compruebaPar(){
+            let numero;
+            do{
+                numero = prompt("Dime el número");
+            }while (isNaN(numero));
+/*
+            if(isNaN(numero)){
+                alert("Te he dicho un número");
+                return;
+            }
+*/
+            if (esPar(numero)){
+                alert("Es par")
+            }
+            else {
+                alert("Es impar")
+            }
+        }
+        
+        function compruebaEdad(){
+            let edad = prompt("Dime tu edad");
+            if(isNaN(edad)){
+                alert("Tiene que ser un número");
+                return;
+            }
+
+            if (edad >= 18){
+                alert("Bienvenido")
+            }
+            else {
+                alert("Acceso denegado")
+            }
+        }
+
+        function imc(m,h){
+            let indice = m/Math.pow(h,2);/**/
+            return indice;
+        }
+
+        function calculaIMC(){
+            let masa = prompt("Dime tu peso");
+            let altura = prompt("Dime tu altura");
+            alert (imc(masa, altura));
+        }
+
+        function calculaMedia(){
+            let n1 = prompt("Dime un numero");
+            let n2 = prompt("Dime otro numero");
+            let n3 = prompt("Dime el ultimo");
+            let m = media3numeros(Number(n1), Number(n2), Number(n3));
+            alert("La media: " + m);
+        }
+
+        function media3numeros(n1,n2,n3){
+            let media = (n1 + n2 + n3)/3;
+            return media;
+        }    
+
+        /**
+         * funcion que recibe como parametros la base y la altura
+         * y devuelve el area del triangulo
+         * **/
+        function areaTriangulo(b,h){
+            let area = b*h/2;
+            return area;
+        }
+
+        /**
+         * calcula el area de un triangulo
+         * pregunta la base y la altura y llama a la funcion
+         * para calcular  el area y muestra el resultado
+         * */
+        function calculaAreaTriangulo(){
+            let b = prompt("Dime la base del triangulo");
+            let h = prompt("Dime la altura del triangulo");
+            let a = areaTriangulo(Number(b), Number(h));
+            alert("Area de un triangulo de base " + b +" y de altura " + h + " es " + a);
+        }
+
+
+        
+    </script>
+
+</body>
+</html>

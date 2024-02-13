@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #display{
+            border: 2px solid red;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -16,8 +23,14 @@
     <button onclick="calculaIMC()">CalculaIMC</button> 
     <button onclick="calculaMedia()">CalculaMedia</button> 
     <button onclick="calculaAreaTriangulo()">CalculaAreaTriangulo</button> 
-    <button onclick="calculaPrecioConIVA()">CalculaPrecioConIVA</button> 
+    <button onclick="calculaPrecioConIva()">CalculaPrecioConIVA</button> 
+    <button onclick="calculaPrecioConIvaTipo()">CalculaPrecioConIVAyTipo</button> 
 
+    <h2>Calculo del precio de IVA de un producto </h2>
+    Precio sin IVA <input value="100" type="number" id="precio-sin-iva">
+    Tipo <input value="3" type="number" max="3" min="1" id="tipo">
+    <button onclick="calculaPrecioConIvaFormulario()">Calculo del precio con IVA</button>
+    <p id="display"></p> 
 
     <script>
         function suma(){
@@ -137,29 +150,67 @@
         }
 
         /**
-         * -  pide un cantidad y devuelve el precio con iva
+         * -  pide una cantidad y devuelve el precio con iva
          */
-        function precioConIVA(precio){
-            let precioIVA = precio*1.21;
-            return precioIVA;
+        function precioConIVA(precioSinIVA, tipo){
+            return precioSinIVA*1.21;
         }
 
-
+        function puedePagarEfectivo(cantidad){
+            if(cantidad<2000){
+                return true;
+            }else{
+                return false;
+            }
+        }
         /**
          * calcula precio con iva, pregunta precio, llama precioConIVA
-         * y miustra al usuario el precio con iva
-         * si es > 2000 no puedes pagar en efectivo 
+         * y muestra al usuario el precio con iva
+         * si es > 2000 no puede pagar en efectivo 
          * **/
-        function calculaPrecioConIVA(){
-            let precio = prompt("Dime el precio:");
-            let precioIVA = precioConIVA(Number(precio));         
-            if (precioIVA >2000){
-                alert("El precio con IVA es: " + precioIVA + ". No puedes pagar en efectivo!");
+        function calculaPrecioConIva(){
+            let precio = prompt("Dime el precio sin IVA ");
+            let precioIVA = precioConIVA(Number(precio));
+            alert("Precio con IVA: " + precioIVA);         
+            if (puedePagarEfectivo(precioIVA)){
+                alert("Puede pagar en efectivo!");
             }
             else{
-                alert("El precio con IVA es: " + precioIVA + ". Puedes pagar en efectivo!");
+                alert("NO puede pagar en efectivo!");
             }
+        }
+        /**
+         * tipos de iva: 1 - 5
+         *               2 - 10
+         *               3 - 21% 
+         * precioConIvaTipo(precio, tipo)
+         * **/
+        function precioConIvaTipo(precio, tipo){
+            if(tipo == 1){
+                return precio*1.05
+            }
+            if(tipo == 2){
+                return precio*1.1;
+            }
+            if(tipo == 3) {
+                return precio*1.21;
+            }
+        }
 
+        function calculaPrecioConIvaTipo(){
+            let precio = prompt("Dime el precio sin IVA: ");
+            let tipo = prompt("Dime tipo de IVA: ");
+            let precioIVA = precioConIvaTipo(precio, tipo);
+            alert("Precio con IVA  tipo " + tipo + " es: " + precioIVA);
+        }
+
+        function calculaPrecioConIvaFormulario(){
+            let precioSinIva = document.getElementById("precio-sin-iva");
+            let precioSinIvaValor = precioSinIva.value;
+            let tipoValor = document.getElementById("tipo").value;
+            let precioIVA = precioConIvaTipo(precioSinIvaValor, tipoValor);
+
+            let display = document.getElementById("display").innerHTML = "El precio con IVA: " + precioIVA;       
         }
 
     </script>

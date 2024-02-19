@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #display{
+            border: 2px solid blue;
+        }
+
+    </style>
+
+</head>
+<body>
+ <!-- 
+    La ecuación del espacio ( x ) para el movimiento rectilíneo uniformemente acelerado es,
+para un espacio inicial cero y una velocidad inicial cero:
+    𝑥 = a*t^2 / 2. 
+    1.En una página html, haz una función en javascript activable por un botón que te pida la
+aceleración a en m/s2, el tiempo t en s y te devuelva la posición del objeto en metros. Para eso
+haz previamente una función abstracta que le entre como parámetros a y t y devuelva x.
+    2.En la misma página crea dos inputs para introducir la aceleración y el tiempo y añade un botón
+que coja esos valores,llame a la función abstracta del apartado anterior y devuelva x.
+-->   
+
+    <h1> 
+        Cálculo de la posición de un objeto (x) con MRUA 
+    </h1>
+    <button onclick="calculaPosicion()">Calcula posición</button>
+
+    <h1>
+        Formulario Posicion
+    </h1>
+
+    <label for="aceleracion">Aceleracion:</label>
+    <input type="number"  id="aceleracion">
+
+    <label for="tiempo"> Tiempo:</label>
+    <input type="number"  id="tiempo">
+
+    <button onclick="calculaPosicionFormulario()">Calcula posición </button>
+
+    <div id="display"></div>
+
+    <script>    
+        function calculaPosicionMRUA(a,t){
+            posicion = a*(Math.pow(t,2))/2;
+            return posicion;
+        }
+
+        function calculaPosicion(){
+            let aceleracion = prompt("Dime la aceleración");
+            let tiempo = prompt("Dime el tiempo");
+            let posicion = calculaPosicionMRUA(aceleracion,tiempo);
+            alert("Posición X es: " + posicion + " metros.  " + alcanzaEstratosfera(posicion));        
+        }
+
+        function calculaPosicionFormulario(){
+            let aceleracion = document.getElementById("aceleracion").value;
+            let tiempo = document.getElementById("tiempo").value;
+            let posicion = calculaPosicionMRUA(aceleracion,tiempo);
+            let display = document.getElementById("display");
+            display.innerHTML = "Posición X es:  " + posicion + " metros.  " + alcanzaEstratosfera(posicion);
+        }
+        
+// devuelve true si es > 10000, false - si no
+        function alcanzaEstratosfera(x){
+            if(x>=10000){
+                return "Alcanza estratosfera."
+            }
+            else {
+                return "NO alcanza estratosfera."
+            }            
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #display{
+            border: 2px solid red;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <h1>Introducción en JS</h1>
+
+    <button onclick="suma()">Sumar</button>
+    <button onclick="login()">Login</button> 
+    <button onclick="compruebaPar()">CompruebaPar</button> 
+    <button onclick="compruebaEdad()">CompruebaEdad</button> 
+    <button onclick="calculaIMC()">CalculaIMC</button> 
+    <button onclick="calculaMedia()">CalculaMedia</button> 
+    <button onclick="calculaAreaTriangulo()">CalculaAreaTriangulo</button> 
+    <button onclick="calculaPrecioConIva()">CalculaPrecioConIVA</button> 
+    <button onclick="calculaPrecioConIvaTipo()">CalculaPrecioConIVAyTipo</button> 
+
+    <h2>Calculo del precio de IVA de un producto </h2>
+
+    Precio sin IVA <input value="100" type="number" id="precio-sin-iva">
+    Tipo <input value="3" type="number" max="3" min="1" id="tipo">
+    <button onclick="calculaPrecioConIvaFormulario()">Calculo del precio con IVA</button>
+    <!--    Para mostrar por la pantalla -->
+    <p id="display"></p> 
+
+    <script>
+        function suma(){
+            alert("Bienvenidos a mi pagina");
+            let n1 = prompt("Dime un numero?");
+            if (isNaN(n1)){
+                alert("NO es un número!");
+                return;
+            }
+            let n2 = prompt("Dime otro numero?");
+            if (isNaN(n2)){
+                    alert("NO es un número!");   
+                    return;
+            }
+            let suma = Number(n1) + Number(n2);
+            alert("La suma de " + n1 + " mas " + n2 + " es " + suma );
+        }
+       
+        function login(){
+            let usuario = prompt("Introduzca usuario:");
+            let contrasena = prompt("Introduzca contraseña:");
+
+            if(usuario == "admin" &&  contrasena == "1234"){
+                alert("Bienvenido a mi página!");
+            }
+            else {
+                alert("Acceso denegado!");
+            }
+        }
+          
+        function esPar(n){
+            if (n%2 == 0){
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
+        function compruebaPar(){
+            let numero;
+            do{
+                numero = prompt("Dime el número");
+            }while (isNaN(numero));
+/*
+            if(isNaN(numero)){
+                alert("Te he dicho un número");
+                return;
+            }
+*/
+            if (esPar(numero)){
+                alert("Es par")
+            }
+            else {
+                alert("Es impar")
+            }
+        }
+        
+        function compruebaEdad(){
+            let edad = prompt("Dime tu edad");
+            if(isNaN(edad)){
+                alert("Tiene que ser un número");
+                return;
+            }
+
+            if (edad >= 18){
+                alert("Bienvenido")
+            }
+            else {
+                alert("Acceso denegado")
+            }
+        }
+
+        function imc(m,h){
+            let indice = m/Math.pow(h,2);/**/
+            return indice;
+        }
+
+        function calculaIMC(){
+            let masa = prompt("Dime tu peso");
+            let altura = prompt("Dime tu altura");
+            alert (imc(masa, altura));
+        }
+
+        function calculaMedia(){
+            let n1 = prompt("Dime un numero");
+            let n2 = prompt("Dime otro numero");
+            let n3 = prompt("Dime el ultimo");
+            let m = media3numeros(Number(n1), Number(n2), Number(n3));
+            alert("La media: " + m);
+        }
+
+        function media3numeros(n1,n2,n3){
+            let media = (n1 + n2 + n3)/3;
+            return media;
+        }    
+
+        /**
+         * funcion que recibe como parametros la base y la altura
+         * y devuelve el area del triangulo
+         * **/
+        function areaTriangulo(b,h){
+            let area = b*h/2;
+            return area;
+        }
+
+        /**
+         * calcula el area de un triangulo
+         * pregunta la base y la altura y llama a la funcion
+         * para calcular  el area y muestra el resultado
+         * */
+        function calculaAreaTriangulo(){
+            let b = prompt("Dime la base del triangulo");
+            let h = prompt("Dime la altura del triangulo");
+            let a = areaTriangulo(Number(b), Number(h));
+            alert("Area de un triangulo de base " + b +" y de altura " + h + " es " + a);
+        }
+
+        /**
+         * -  pide una cantidad y devuelve el precio con iva
+         */
+        function precioConIVA(precioSinIVA, tipo){
+            return precioSinIVA*1.21;
+        }
+
+        function puedePagarEfectivo(cantidad){
+            if(cantidad<2000){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        /**
+         * calcula precio con iva, pregunta precio, llama precioConIVA
+         * y muestra al usuario el precio con iva
+         * si es > 2000 no puede pagar en efectivo 
+         * **/
+        function calculaPrecioConIva(){
+            let precio = prompt("Dime el precio sin IVA ");
+            let precioIVA = precioConIVA(Number(precio));
+            alert("Precio con IVA: " + precioIVA);         
+            if (puedePagarEfectivo(precioIVA)){
+                alert("Puede pagar en efectivo!");
+            }
+            else{
+                alert("NO puede pagar en efectivo!");
+            }
+        }
+        /**
+         * tipos de iva: 1 - 5
+         *               2 - 10
+         *               3 - 21% 
+         * precioConIvaTipo(precio, tipo)
+         * **/
+        function precioConIvaTipo(precio, tipo){
+            if(tipo == 1){
+                return precio*1.05
+            }
+            if(tipo == 2){
+                return precio*1.1;
+            }
+            if(tipo == 3) {
+                return precio*1.21;
+            }
+        }
+
+        function calculaPrecioConIvaTipo(){
+            let precio = prompt("Dime el precio sin IVA: ");
+            let tipo = prompt("Dime tipo de IVA: ");
+            let precioIVA = precioConIvaTipo(precio, tipo);
+            alert("Precio con IVA  tipo " + tipo + " es: " + precioIVA);
+        }
+
+        function calculaPrecioConIvaFormulario(){
+            let precioSinIva = document.getElementById("precio-sin-iva");
+            let precioSinIvaValor = precioSinIva.value;
+            let tipoValor = document.getElementById("tipo").value;
+            let precioIVA = precioConIvaTipo(precioSinIvaValor, tipoValor);
+
+            let display = document.getElementById("display").innerHTML = "El precio con IVA: " + precioIVA;       
+        }
+
+    </script>
+
+</body>
+</html>
